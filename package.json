@@ -3,11 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.8.0",
+    "@ant-design/plots": "^1.2.2",
+    "@chakra-ui/react": "^2.4.1",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "antd": "^5.0.1",
     "cra-template": "1.2.0",
+    "framer-motion": "^7.6.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
-    "reactflow": "^11.3.0"
+    "reactflow": "^11.3.0",
+    "recoil": "^0.7.6",
+    "web-worker": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
