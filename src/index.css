@@ -1,28 +1,187 @@
-body {
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-.link{
-  text-decoration: none;
-}
-
-.dndflow{
+.dndflow {
   flex-direction: column;
   display: flex;
   flex-grow: 1;
   height: calc(100% - 60px);
 }
 
-.reactflow-wrapper {
+.dndflow aside {
+  border-right: 1px solid #eee;
+  padding: 15px 10px;
+  font-size: 12px;
+  background: #fcfcfc;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.dndflow aside .description {
+  margin-bottom: 10px;
+}
+
+.dndflow .dndnode {
+  height: 20px;
+  padding: 4px;
+  border: 1px solid #1a192b;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+}
+
+.dndflow .dndnode.input {
+  border-color: #0041d0;
+}
+
+.dndflow .dndnode.output {
+  border-color: #ff0072;
+}
+
+.dndflow .reactflow-wrapper {
   flex-grow: 1;
   height: 100%;
+}
+
+.dndflow .selectall {
+  margin-top: 10px;
+}
+
+.dndflow .react-flow__node .react-flow__handle {
+  z-index: 2;
+  border-radius: unset;
+  border: none;
+  background-color: blue;
+}
+
+.dndflow .react-flow__node .react-flow__handle.react-flow__handle-right {
+  right: -25px;
+  width: 25px;
+  height: 100%;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.dndflow .react-flow__node .react-flow__handle.react-flow__handle-left {
+  left: -25px;
+  width: 25px;
+  height: 100%;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.dndflow .react-flow__node .react-flow__handle.handle-left-custom {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  left: -35px;
+  height: 18px;
+  width: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  .dndflow {
+    flex-direction: row;
+  }
+
+  .dndflow aside {
+    width: 29%;
+    max-width: 280px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .dndflow aside {
+    order: 1;
+  }
+}
+
+.node-container {
+  width: 300px;
+}
+
+.chart-container {
+  width: 850px;
+}
+
+.text-editor{
+  height: 600px;
+}
+
+.inputhttp {
+  width: 100%;
+  border: 1px solid;
+  border-radius: 3px;
+}
+.inputhttp:focus {
+  outline: none;
+  z-index: 1;
+  border-color: rgb(99, 179, 237);
+  box-shadow: rgb(99 179 237) 0px 0px 0px 1px;
+}
+.buttonfile {
+  margin-top: 10px;
+  padding: 3px 5px;
+  border-radius: 4px;
+  border: 1px solid;
+}
+.buttonfile:hover {
+  background-color: teal;
+  color: white;
+}
+.value-Pasted {
+  width: 100%;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+  position: relative;
+  appearance: none;
+  height: 70px;
+  background-color: #1a202c;
+  color: white;
+  border: 1px solid white;
+  border-radius: 4px;
+  margin-top: 3px;
+  font-size: 9px;
+}
+.value-Pasted:focus {
+  outline: none;
+  z-index: 1;
+  border-color: rgb(99, 179, 237);
+  box-shadow: rgb(99 179 237) 0px 0px 0px 1px;
+}
+.export-Container {
+  display: flex;
+  flex-direction: column;
+}
+.button-export {
+  border: 1px solid;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+.button-export:hover {
+  background-color: teal;
+  color: white;
+}
+
+.App-logo {
+  pointer-events: none;
+}
+
+.react-flow__attribution {
+  display: none !important;
+}
+
+.input-qmk{
+  cursor: pointer;
 }

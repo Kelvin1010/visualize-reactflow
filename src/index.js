@@ -7,6 +7,7 @@ import App from './App';
 import { RecoilRoot } from 'recoil';
 import { ReactFlowProvider } from 'reactflow/dist/esm';
 import { BrowserRouter } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +15,9 @@ root.render(
     <BrowserRouter>
       <RecoilRoot>
         <ReactFlowProvider>
-          <App />
+          <ChakraProvider>
+            <App />
+          </ChakraProvider>
         </ReactFlowProvider>
       </RecoilRoot>
     </BrowserRouter>

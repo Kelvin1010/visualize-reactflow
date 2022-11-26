@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom'
 function Header() {
 
     const [click, setClick] = useState(false);
+
     const handleNavigate = () => {
         setClick(true)
     }
@@ -14,8 +15,7 @@ function Header() {
         <div className='header'>
             <Row className='header-main'>
                 <Col span={8} className='header-left'>
-                    <div className='header-left-icon' onClick={()=>handleNavigate()}>
-                        {click === true && <Navigate to={'/visualize'} replace={true} />}
+                    <div className='header-left-icon'>
                     </div>
                     <h1>
                         Data Analytics
