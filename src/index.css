@@ -14,3 +14,15 @@ code {
 .link{
   text-decoration: none;
 }
+
+.dndflow{
+  flex-direction: column;
+  display: flex;
+  flex-grow: 1;
+  height: calc(100% - 60px);
+}
+
+.reactflow-wrapper {
+  flex-grow: 1;
+  height: 100%;
+}
