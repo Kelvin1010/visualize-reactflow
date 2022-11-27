@@ -41,6 +41,10 @@ body,
   align-items: center;
   cursor: grab;
 }
+.dndflow .dndnode:hover{
+  background-color: teal;
+  color: white;
+}
 
 .dndflow .dndnode.input {
   border-color: #0041d0;
@@ -63,7 +67,7 @@ body,
   z-index: 2;
   border-radius: unset;
   border: none;
-  background-color: blue;
+  background-color: teal;
 }
 
 .dndflow .react-flow__node .react-flow__handle.react-flow__handle-right {
@@ -131,10 +135,10 @@ body,
   box-shadow: rgb(99 179 237) 0px 0px 0px 1px;
 }
 .buttonfile {
-  margin-top: 10px;
-  padding: 3px 5px;
+  padding: 2px 5px;
   border-radius: 4px;
   border: 1px solid;
+  width: 100%;
 }
 .buttonfile:hover {
   background-color: teal;
@@ -182,6 +186,3 @@ body,
   display: none !important;
 }
 
-.input-qmk{
-  cursor: pointer;
-}

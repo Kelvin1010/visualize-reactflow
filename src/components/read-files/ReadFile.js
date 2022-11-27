@@ -42,7 +42,7 @@ function ReadFile() {
                 className='buttonfile'
                 onClick={fileUploadButton}
             >
-                Open File [CSV, XLXS, ONXX]
+                Open File [CSV, XLXS]
                 <input 
                     id="fileButton" 
                     type="file" 

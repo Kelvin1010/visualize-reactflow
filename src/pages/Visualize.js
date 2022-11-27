@@ -1,9 +1,10 @@
 import { Box } from '@chakra-ui/react'
 import { nanoid } from 'nanoid';
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import ReactFlow, { addEdge, Background, Controls, getRectOfNodes, MarkerType, Position, useEdgesState, useNodesState, useReactFlow } from 'reactflow'
+import ReactFlow, { addEdge, Background, Controls, getRectOfNodes, MarkerType, Position, updateEdge, useEdgesState, useNodesState, useReactFlow } from 'reactflow'
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { createGraphLayout } from '../components/algorithms-layout/layout-elkjs';
+import EdgesContainer from '../components/edges-container';
 import GroupContainer from '../components/group-container';
 import Header from '../components/header';
 import NodeAutodrawContainer from '../components/node-autodraw-container';
@@ -84,6 +85,9 @@ const nodeTypes = {
     nodeautodraw: NodeAutodrawContainer,
 };
 
+const edgeTypes = {
+    edgescontainer: EdgesContainer,
+};
 
 const rfStyle = {
     backgroundColor: "black",
@@ -96,6 +100,8 @@ function Visualize() {
 
     const setValueAtom = useSetRecoilState(atomState);
     const reactFlowWrapper = useRef(null);
+    const dragRef = useRef(null);
+    const [target, setTarget] = useState(null);
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const { getIntersectingNodes } = useReactFlow();
@@ -104,12 +110,28 @@ function Visualize() {
     const getWandH = getRectOfNodes(selectedNodes);
     const filehere = useRecoilValue(file);
 
-    const onConnect = useCallback((connection) => setEdges((eds) => addEdge(connection, eds)), [setEdges]);
+    const onConnect = useCallback((connection) => setEdges((eds) => addEdge({
+        ...connection, 
+        type: 'edgescontainer', 
+        animated:true, 
+        label:'Connected',
+        markerEnd: {
+            type: MarkerType.ArrowClosed,
+            width: 15,
+            height: 15,
+            color: 'red',
+        },
+    }, eds)), [setEdges]);
 
     const onDragOver = useCallback((event) => {
         event.preventDefault();
         event.dataTransfer.dropEffect = "move";
     }, []);
+
+    const onEdgeUpdate = useCallback(
+        (oldEdge, newConnection) => setEdges((els) => updateEdge(oldEdge, newConnection, els)),
+        []
+    );
 
     const onDrop = useCallback(
         (event) => {
@@ -144,17 +166,8 @@ function Visualize() {
         [reactFlowInstance, setNodes],
     );
 
-    const onNodeDrag = useCallback((_, node) => {
-        const intersections = getIntersectingNodes(node).map((n) => n.id);
 
-        setNodes((ns) =>
-        ns.map((n) => ({
-            ...n,
-            className: intersections.includes(n.id) ? 'highlight' : '',
-        }))
-        );
-    }, []);
-
+    //create group
     const handleCreateGroup = () => {
         if(selectedNodes?.length > 1){
             const newNodeGroup = {
@@ -254,21 +267,20 @@ function Visualize() {
             <Header/>
             <div className='dndflow'>
                 <Sidebar />
-                <div className='reactflow-wrapper' ref={reactFlowWrapper}>
+                <div className='reactflow-wrapper' ref={reactFlowWrapper} id="download-image">
                     <ReactFlow
                         nodes={nodes}
                         edges={edges}
                         onNodesChange={onNodesChange}
                         onEdgesChange={onEdgesChange}
-                        onNodeDrag={onNodeDrag}
                         onInit={setReactFlowInstance}
                         onDrop={onDrop}
                         onDragOver={onDragOver}
                         onConnect={onConnect}
-                        minZoom={0.2}
-                        maxZoom={4}
+                        onEdgeUpdate={onEdgeUpdate}
                         style={rfStyle}
                         nodeTypes={nodeTypes}
+                        edgeTypes={edgeTypes}
                         fitView
                     >
                         <Background />

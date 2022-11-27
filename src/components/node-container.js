@@ -23,6 +23,7 @@ function NodeContainer({
     const { getEdges, getNode } = useReactFlow();
     const store = useStoreApi();
 
+
     function handleDeleteNode() {
         const { onNodesDelete, onNodesChange, onEdgesChange, onEdgesDelete } = store.getState();
         const nodesToRemove = [getNode(id)];
@@ -30,22 +31,22 @@ function NodeContainer({
         const connectedEdges = getConnectedEdges(nodesToRemove, getEdges());
         const edgesToRemove = [...connectedEdges];
         const edgeIdsToRemove = edgesToRemove.reduce((res, edge) => {
-        if (!res.includes(edge.id)) {
-            res.push(edge.id);
-        }
-        return res;
+            if (!res.includes(edge.id)) {
+                res.push(edge.id);
+            }
+            return res;
         }, []);
 
         if (edgeIdsToRemove.length > 0) {
-        onEdgesDelete?.(edgesToRemove);
+            onEdgesDelete?.(edgesToRemove);
 
-        if (onEdgesChange) {
-            const edgeChanges = edgeIdsToRemove.map((id) => ({
-            id,
-            type: "remove",
-            }));
-            onEdgesChange(edgeChanges);
-        }
+            if (onEdgesChange) {
+                const edgeChanges = edgeIdsToRemove.map((id) => ({
+                id,
+                type: "remove",
+                }));
+                onEdgesChange(edgeChanges);
+            }
         }
 
         if (nodesToRemove.length > 0) {
@@ -53,11 +54,11 @@ function NodeContainer({
 
         if (onEdgesChange) {
             const nodeChanges = nodesToRemove.map((n) => ({
-            id: n.id,
-            type: "remove",
-            }));
-            onNodesChange(nodeChanges);
-        }
+                id: n.id,
+                type: "remove",
+                }));
+                onNodesChange(nodeChanges);
+            }
         }
 
         setAtoms(

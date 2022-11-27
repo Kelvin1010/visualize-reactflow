@@ -14,6 +14,11 @@
 .welcome-center .click-welcome{
     width: 100%;
 }
+.welcome-center h1{
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+}
 .dont-account{
     display: flex;
     width: 100%;
@@ -94,4 +99,32 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+
+.edgebutton {
+    width: 20px;
+    height: 20px;
+    background: red;
+    border: 1px solid #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 12px;
+    line-height: 1;
+    color: white;
+}
+  
+.edgebutton:hover {
+    box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.08);
+}
+  
+.edgebutton-foreignobject div {
+    background: transparent;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40px;
 }

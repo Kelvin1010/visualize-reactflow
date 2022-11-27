@@ -185,9 +185,9 @@ function Register() {
                     </Form.Item>
 
                     <Form.Item wrapperCol={{offset: 10,span: 17,}} className='rgt'>
-                        <span>Don't have a account!&ensp;</span>
+                        <span>Have a account!&ensp;</span>
                         <Link to={'/login'} className='link'>
-                            <span>Sign Up</span>
+                            <span>Sign In</span>
                         </Link>
                     </Form.Item>
                 </Form>
