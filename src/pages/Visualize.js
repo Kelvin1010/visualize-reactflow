@@ -16,9 +16,11 @@ import {
     BarGroupChartWrapper,
     BarStackedChartWrapper,
     BarWrapper,
+    BasicLineChartWrapper,
     Bubble3dChartWrapper,
     BubblePlotChartWrapper,
     CodeNodeWrapper,
+    ColumnBasicChartWrapper,
     ColumnBasicSliderChartWrapper,
     ColumnGroupChartWrapper,
     ColumnStackedChartWrapper,
@@ -36,6 +38,11 @@ import {
     PercentBarChartWrapper,
     PercentColumnChartWrapper,
     PieChartWrapper,
+    PieDarkThemeChartWrapper,
+    RadarBasicChartWrapper,
+    RoseBasicChartWrapper,
+    RoseGroupChartWrapper,
+    RoseStackedChartWrapper,
     ScatterPlotChartWrapper,
     SliceWrapper,
     SortWrapper,
@@ -70,8 +77,10 @@ const nodeTypes = {
     "bar-percent-chart": PercentBarChartWrapper,
     "column-group-chart": ColumnGroupChartWrapper,
     "column-basic-slider-chart": ColumnBasicSliderChartWrapper,
+    "column-basic-chart": ColumnBasicChartWrapper,
     "column-stacked-chart": ColumnStackedChartWrapper,
     "percent-column-chart": PercentColumnChartWrapper,
+    "basic-line-chart": BasicLineChartWrapper,  
     "multiple-line-plot-animation-chart": MultipleLinePlotAnimationWrapper,
     "step-line-chart": StepLineChartWrapper,
     "heatmap-shapesize-chart": HeatmapShapezieChartWrapper,
@@ -81,11 +90,16 @@ const nodeTypes = {
     "tree-map-chart": TreeMapsChartWrapper,
     stats: StatsWrapper,
     "pie-chart": PieChartWrapper,
+    "pie-dark-chart": PieDarkThemeChartWrapper,
+    "rose-basic-chart": RoseBasicChartWrapper,
+    "rose-group-chart": RoseGroupChartWrapper,
+    "rose-stacked-chart": RoseStackedChartWrapper,
     "code-node": CodeNodeWrapper,
     "text-node": TextNodeWrapper,
     "image-node": ImageNodeWrapper,
     groupNode: GroupContainer,
     nodeautodraw: NodeAutodrawContainer,
+    "radar-basic-chart": RadarBasicChartWrapper,
 };
 
 const edgeTypes = {
@@ -295,6 +309,7 @@ function Visualize() {
                             onDragOver={onDragOver}
                             onConnect={onConnect}
                             onEdgeUpdate={onEdgeUpdate}
+                            onMouseUp={handleCreateGroup}
                             nodeTypes={nodeTypes}
                             edgeTypes={edgeTypes}
                             style={{

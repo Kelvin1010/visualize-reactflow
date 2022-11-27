@@ -1,16 +1,20 @@
-import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutlined, PieChartOutlined, BorderInnerOutlined } from '@ant-design/icons';
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutlined, PieChartOutlined, BorderInnerOutlined, HeatMapOutlined, RadarChartOutlined } from '@ant-design/icons';
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, useColorModeValue } from '@chakra-ui/react';
 import DarkLight from './dark-light';
-import DownloadImageButton from './download-image';
+import DownloadImageButton from './download-image/download-image';
+import DownloadImageJpegButton from './download-image/download-image-jpeg';
+import DownloadImageSvgButton from './download-image/download-image-svg';
 import { 
   AreaBasicChartWrapper,
   AreaStackedChartWrapper,
   BarGroupChartWrapper,
   BarStackedChartWrapper,
   BarWrapper,
+  BasicLineChartWrapper,
   Bubble3dChartWrapper,
   BubblePlotChartWrapper,
   CodeNodeWrapper, 
+  ColumnBasicChartWrapper, 
   ColumnBasicSliderChartWrapper, 
   ColumnGroupChartWrapper, 
   ColumnStackedChartWrapper, 
@@ -28,6 +32,11 @@ import {
   PercentBarChartWrapper, 
   PercentColumnChartWrapper, 
   PieChartWrapper, 
+  PieDarkThemeChartWrapper, 
+  RadarBasicChartWrapper, 
+  RoseBasicChartWrapper, 
+  RoseGroupChartWrapper, 
+  RoseStackedChartWrapper, 
   ScatterPlotChartWrapper, 
   SliceWrapper, 
   SortWrapper, 
@@ -53,7 +62,7 @@ function Sidebar() {
           }}
         >
           <Accordion defaultIndex={[0, 1, 2]} allowToggle allowMultiple>
-          <AccordionItem border="none">
+            <AccordionItem border="none">
               <h2>
                 <AccordionButton>
                   <Box flex="1" textAlign="left">
@@ -64,7 +73,21 @@ function Sidebar() {
               </h2>
               <AccordionPanel>
                 <DarkLight />
-                <DownloadImageButton />
+                <AccordionItem border="none">
+                  <h2>
+                    <AccordionButton>
+                      <Box flex="1" textAlign="left">
+                        Download Images
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel>
+                    <DownloadImageButton />
+                    <DownloadImageJpegButton />
+                    <DownloadImageSvgButton />
+                  </AccordionPanel>
+                </AccordionItem>
               </AccordionPanel>
             </AccordionItem>
             <AccordionItem border="none">
@@ -162,6 +185,7 @@ function Sidebar() {
                     </AccordionButton>
                   </h2>
                   <AccordionPanel>
+                    <BasicLineChartWrapper.Sidebar onDragStart={onDragStart} />
                     <MultipleLinePlotAnimationWrapper.Sidebar onDragStart={onDragStart} />
                     <StepLineChartWrapper.Sidebar onDragStart={onDragStart} />
                   </AccordionPanel>
@@ -176,6 +200,7 @@ function Sidebar() {
                     </AccordionButton>
                   </h2>
                   <AccordionPanel>
+                    <ColumnBasicChartWrapper.Sidebar onDragStart={onDragStart} />
                     <ColumnBasicSliderChartWrapper.Sidebar onDragStart={onDragStart} />
                     <ColumnStackedChartWrapper.Sidebar onDragStart={onDragStart} />
                     <ColumnGroupChartWrapper.Sidebar onDragStart={onDragStart} />
@@ -209,13 +234,29 @@ function Sidebar() {
                   </h2>
                   <AccordionPanel>
                     <PieChartWrapper.Sidebar onDragStart={onDragStart} />
+                    <PieDarkThemeChartWrapper.Sidebar onDragStart={onDragStart} />
                   </AccordionPanel>
                 </AccordionItem>
                 <AccordionItem>
                   <h2>
                     <AccordionButton>
                       <Box flex="1" textAlign="left">
-                        <DotChartOutlined /> Scatter and Bubble
+                        <PieChartOutlined /> Rose
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel>
+                    <RoseBasicChartWrapper.Sidebar onDragStart={onDragStart} />
+                    <RoseGroupChartWrapper.Sidebar onDragStart={onDragStart} />
+                    <RoseStackedChartWrapper.Sidebar onDragStart={onDragStart} />
+                  </AccordionPanel>
+                </AccordionItem>
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box flex="1" textAlign="left">
+                        <DotChartOutlined /> Dots
                       </Box>
                       <AccordionIcon />
                     </AccordionButton>
@@ -254,7 +295,7 @@ function Sidebar() {
                   <h2>
                     <AccordionButton>
                       <Box flex="1" textAlign="left">
-                        <BorderInnerOutlined /> Heatmap
+                        <HeatMapOutlined /> Heatmap
                       </Box>
                       <AccordionIcon />
                     </AccordionButton>
@@ -267,38 +308,26 @@ function Sidebar() {
                   <h2>
                     <AccordionButton>
                       <Box flex="1" textAlign="left">
-                        <BorderInnerOutlined /> Advanced Plots
+                        <RadarChartOutlined /> Radar
                       </Box>
                       <AccordionIcon />
                     </AccordionButton>
                   </h2>
                   <AccordionPanel>
-                    <AccordionItem>
-                      <h2>
-                        <AccordionButton>
-                          <Box flex="1" textAlign="left">
-                            <BorderInnerOutlined /> Tree maps
-                          </Box>
-                          <AccordionIcon />
-                        </AccordionButton>
-                      </h2>
-                      <AccordionPanel>
-                        <TreeMapsChartWrapper.Sidebar onDragStart={onDragStart} />
-                      </AccordionPanel>
-                    </AccordionItem>
-                    <AccordionItem>
-                      <h2>
-                        <AccordionButton>
-                          <Box flex="1" textAlign="left">
-                            <BorderInnerOutlined /> Radar
-                          </Box>
-                          <AccordionIcon />
-                        </AccordionButton>
-                      </h2>
-                      <AccordionPanel>
-                        hhhh
-                      </AccordionPanel>
-                    </AccordionItem>
+                    <RadarBasicChartWrapper.Sidebar onDragStart={onDragStart} />
+                  </AccordionPanel>
+                </AccordionItem>
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box flex="1" textAlign="left">
+                        <BorderInnerOutlined /> Tree maps
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel>
+                    <TreeMapsChartWrapper.Sidebar onDragStart={onDragStart} />
                   </AccordionPanel>
                 </AccordionItem>
                 <AccordionItem>

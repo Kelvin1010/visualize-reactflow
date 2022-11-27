@@ -1,3 +1,4 @@
+import { useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 import { EdgeLabelRenderer, getBezierPath, getConnectedEdges, getSmoothStepPath, useEdges, useNodes, useReactFlow, useStoreApi } from 'reactflow';
 
@@ -32,11 +33,13 @@ function EdgesContainer({
     //     data?.setEdges((edges) => edges.filter((ed) => ed.id !== id));
     // };
 
+    const colorEdge = useColorModeValue('black','white')
+
     return (
         <>
             <path
                 id={id}
-                style={{ stroke: 'white', strokeWidth: 3 }}
+                style={{ stroke: colorEdge, strokeWidth: 3 }}
                 className="react-flow__edge-path"
                 d={edgePath}
                 markerEnd={markerEnd}

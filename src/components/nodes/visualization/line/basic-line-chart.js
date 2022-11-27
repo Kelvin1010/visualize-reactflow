@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { Box, FormControl, FormLabel, Select, Stack } from "@chakra-ui/react";
+import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { Column } from '@ant-design/plots';
+import { Box, FormControl, FormLabel, Select, Stack } from "@chakra-ui/react";
+import { Line } from '@ant-design/plots';
 import { getIncomers, useEdges, useNodes, useReactFlow } from 'reactflow';
 import { atomState } from '../../../../helper/atom';
-import { Move2ColumnsOfData } from '../../../data-transfer/move-columns-of-data';
 import NodeContainer from '../../../node-container';
+import { Move2ColumnsOfData } from '../../../data-transfer/move-columns-of-data';
 
 
 const options = {
@@ -17,9 +17,7 @@ const initialState = {
     yColumn: "",
 };
 
-
-
-function ColumnBasicSliderChart({ onCallback, id }) {
+function BasicLineChart({ onCallback, id }) {
 
     const { getNode } = useReactFlow();
     const allNodes = useNodes();
@@ -64,19 +62,13 @@ function ColumnBasicSliderChart({ onCallback, id }) {
 
     const config = {
         data,
+        padding: 'auto',
         xField: 'x',
         yField: 'y',
         xAxis: {
-          label: {
-            autoRotate: false,
-          },
+          // type: 'timeCat',
+          tickCount: 5,
         },
-        slider: {
-          start: 0.1,
-          end: 0.2,
-        },
-        with: 600,
-        height: 500,
     };
 
     return (
@@ -107,29 +99,29 @@ function ColumnBasicSliderChart({ onCallback, id }) {
                     ))}
                     </Select>
                 </FormControl>
-                <Column {...config} />
+                    <Line {...config} />
                 </Stack>
             )}
         </Box>
     )
 }
 
-export default ColumnBasicSliderChart
-  
+export default BasicLineChart
+
 function Sidebar({ onDragStart }) {
     return (
-      <div className="dndnode" onDragStart={(event) => onDragStart(event, "column-basic-slider-chart")} draggable>
-        Biểu đồ cột slider cơ bản
+      <div className="dndnode" onDragStart={(event) => onDragStart(event, "basic-line-chart")} draggable>
+        Biểu đồ Basic Line
       </div>
     );
 }
   
-export function ColumnBasicSliderChartWrapper(props) {
+export function BasicLineChartWrapper(props) {
     return (
-      <NodeContainer {...props} label="Biểu đồ cột slider cơ bản" isLeftHandle className="chart-container">
-        <ColumnBasicSliderChart />
+      <NodeContainer {...props} label="Biểu đồ Basic Line" isLeftHandle className="chart-container">
+        <BasicLineChart />
       </NodeContainer>
     );
 }
   
-ColumnBasicSliderChartWrapper.Sidebar = Sidebar;
+BasicLineChartWrapper.Sidebar = Sidebar;

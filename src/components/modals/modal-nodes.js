@@ -29,13 +29,16 @@ function ModalNodes({data,...props}) {
                 <ModalHeader>Data Node</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody pb={6}>
-                    <input 
+                    {/* <input 
                         type={'text'} 
                         placeholder="Search..." 
                         className='search' 
                         onChange={(e) => setQuery(e.target.value)} 
-                    />
+                    /> */}
                     <JsonPrettyViewer 
+                        style={{
+                            color: iconModalColor
+                        }}
                         json={data?.output || data || null} 
                         
                     />

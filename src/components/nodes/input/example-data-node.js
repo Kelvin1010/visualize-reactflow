@@ -10,6 +10,7 @@ import city from '../../../data/city.json';
 import city2 from '../../../data/city2.json';
 import databubble from '../../../data/data-bubble.json';
 import culinary from '../../../data/culinary.json';
+import radar from '../../../data/radar.json';
 
 function ExampleData({ onCallback, data }) {
   const [option, setOption] = useState("");
@@ -35,6 +36,7 @@ function ExampleData({ onCallback, data }) {
       <Select value={option} onChange={handleChange}>
         <option value="countries_indicators">Countries Indicator</option>
         <option value="culinary">Culinary</option>
+        <option value="radar">Radar</option>
         <option value="data-bubble">Data Bubble</option>
         <option value="sex">Sex</option>
         <option value="city">Citys</option>
@@ -67,6 +69,8 @@ async function fakeApi(option) {
       return culinary
     case "sex":
       return sex
+    case "radar":
+      return radar
     default:
       return [];
   }

@@ -17,9 +17,7 @@ const initialState = {
     yColumn: "",
 };
 
-
-
-function ColumnBasicSliderChart({ onCallback, id }) {
+function ColumnBasicChart({ onCallback, id }) {
 
     const { getNode } = useReactFlow();
     const allNodes = useNodes();
@@ -66,17 +64,28 @@ function ColumnBasicSliderChart({ onCallback, id }) {
         data,
         xField: 'x',
         yField: 'y',
+        label: {
+          position: 'middle',
+          // 'top', 'bottom', 'middle'
+          style: {
+            fill: '#FFFFFF',
+            opacity: 0.6,
+          },
+        },
         xAxis: {
           label: {
+            autoHide: true,
             autoRotate: false,
           },
         },
-        slider: {
-          start: 0.1,
-          end: 0.2,
+        meta: {
+          type: {
+            alias: '类别',
+          },
+          sales: {
+            alias: 'value',
+          },
         },
-        with: 600,
-        height: 500,
     };
 
     return (
@@ -114,22 +123,22 @@ function ColumnBasicSliderChart({ onCallback, id }) {
     )
 }
 
-export default ColumnBasicSliderChart
-  
+export default ColumnBasicChart
+
 function Sidebar({ onDragStart }) {
     return (
-      <div className="dndnode" onDragStart={(event) => onDragStart(event, "column-basic-slider-chart")} draggable>
-        Biểu đồ cột slider cơ bản
+      <div className="dndnode" onDragStart={(event) => onDragStart(event, "column-basic-chart")} draggable>
+        Biểu đồ cột cơ bản
       </div>
     );
 }
   
-export function ColumnBasicSliderChartWrapper(props) {
+export function ColumnBasicChartWrapper(props) {
     return (
-      <NodeContainer {...props} label="Biểu đồ cột slider cơ bản" isLeftHandle className="chart-container">
-        <ColumnBasicSliderChart />
+      <NodeContainer {...props} label="Biểu đồ cột cơ bản" isLeftHandle className="chart-container">
+        <ColumnBasicChart />
       </NodeContainer>
     );
 }
   
-ColumnBasicSliderChartWrapper.Sidebar = Sidebar;
+ColumnBasicChartWrapper.Sidebar = Sidebar;

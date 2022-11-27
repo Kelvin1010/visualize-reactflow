@@ -1,20 +1,20 @@
+import React from 'react';
 import { DownloadOutlined } from '@ant-design/icons';
 import { useColorModeValue } from '@chakra-ui/react';
-import { toPng } from 'html-to-image';
-import React from 'react'
+import { toJpeg } from 'html-to-image';
 
-function DownloadImage(dataUrl) {
+function DownloadImageJpeg(dataUrl) {
     const a = document.createElement('a');
 
-    a.setAttribute('download', 'reactflow.png');
+    a.setAttribute('download', 'reactflow.jpeg');
     a.setAttribute('href', dataUrl);
     a.click();
 }
 
-function DownloadImageButton() {
+function DownloadImageJpegButton() {
 
     const handleClickToDownLoadImage = () => {
-        toPng(document.querySelector('.react-flow'), {
+        toJpeg(document.querySelector('.react-flow'), {
           filter: (node) => {
             // we don't want to add the minimap and the controls to the image
             if (
@@ -26,7 +26,7 @@ function DownloadImageButton() {
     
             return true;
           },
-        }).then(DownloadImage);
+        }).then(DownloadImageJpeg);
     };
 
     const bg = useColorModeValue('white','black');
@@ -44,9 +44,9 @@ function DownloadImageButton() {
         onClick={handleClickToDownLoadImage}
       >
         <DownloadOutlined />&nbsp;
-        Download Image
+        Download Image Jpeg
       </div>
     )
 }
 
-export default DownloadImageButton
+export default DownloadImageJpegButton
