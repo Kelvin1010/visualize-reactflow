@@ -128,3 +128,16 @@
     align-items: center;
     min-height: 40px;
 }
+
+.themeColorBg{
+    position: absolute;
+    left: 97%;
+    top: 10%;
+    z-index: 999;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.ant-upload{
+    color: red !important;
+}

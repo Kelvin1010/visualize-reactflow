@@ -1,5 +1,6 @@
 import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutlined, PieChartOutlined, BorderInnerOutlined } from '@ant-design/icons';
-import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box } from '@chakra-ui/react';
+import { Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box, useColorMode, useColorModeValue } from '@chakra-ui/react';
+import DarkLight from './dark-light';
 import DownloadImageButton from './download-image';
 import { 
   AreaBasicChartWrapper,
@@ -41,10 +42,16 @@ function Sidebar() {
     const onDragStart = (event, nodeType) => {
         event.dataTransfer.setData("application/reactflow", nodeType);
         event.dataTransfer.effectAllowed = "move";
-      };
-    
+    };
+
+    const background = useColorModeValue('white', 'black');
+
       return (
-        <aside>
+        <aside
+          style={{
+            backgroundColor: background
+          }}
+        >
           <Accordion defaultIndex={[0, 1, 2]} allowToggle allowMultiple>
           <AccordionItem border="none">
               <h2>
@@ -56,6 +63,7 @@ function Sidebar() {
                 </AccordionButton>
               </h2>
               <AccordionPanel>
+                <DarkLight />
                 <DownloadImageButton />
               </AccordionPanel>
             </AccordionItem>

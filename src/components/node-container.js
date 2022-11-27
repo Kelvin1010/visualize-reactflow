@@ -1,11 +1,30 @@
 import React from 'react';
 import produce from "immer";
-import { Box, CloseButton, Divider, Stack, Text } from "@chakra-ui/react";
+import { Box, CloseButton, Divider, Stack, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { DragHandleIcon } from "@chakra-ui/icons";
 import { getConnectedEdges, Handle, useReactFlow, useStoreApi } from 'reactflow';
 import { useRecoilState } from 'recoil';
 import { atomState } from '../helper/atom';
 import ModalNodes from './modals/modal-nodes';
+import styled from 'styled-components';
+
+
+const Node = styled.div`
+    .react-flow__handle {
+        z-index: 2;
+        border-radius: unset;
+        border: none;
+        background-color: ${(props) => (props.selected ? props.theme.primary : props.theme.nodeBorder)};
+    }
+    .node-container{
+        background-color: ${(props) => props.theme.bgNode}
+        color: ${(props) => props.theme.textColor}
+    }
+    .ant-upload{
+        color: ${(props) => props.theme.colorbuttonImg}
+    }
+`
+
 
 function NodeContainer({
     children,
@@ -15,6 +34,7 @@ function NodeContainer({
     isLeftHandle = false,
     className = "node-container",
     type,
+    selected
 }) {
 
     const [atoms, setAtoms] = useRecoilState(atomState);
@@ -90,10 +110,13 @@ function NodeContainer({
         return child;
     });
 
+    const bg = useColorModeValue('black', 'white')
+    const textNode = useColorModeValue('white', 'black');
+
     return (
-        <div>
+        <Node selected={selected}>
             {isLeftHandle && <Handle type="target" position="left" className="handle-left" isConnectable={isConnectable} />}
-            <Box boxShadow="sm" backgroundColor="white" className={className}>
+            <Box boxShadow="sm" color={textNode} backgroundColor={bg} className={className}>
                 <Stack padding="4" direction="row" justify="space-between" alignItems="center" className="custom-drag-handle">
                 <Box display="flex" alignItems="center" fontSize="lg">
                     <DragHandleIcon mr="2" />
@@ -114,7 +137,7 @@ function NodeContainer({
             {!OUTPUT_TYPE_NODE.includes(type) && (
                 <Handle type="source" position="right" className="handle-right" isConnectable={isConnectable} />
             )}
-        </div>
+        </Node>
     )
 }
 

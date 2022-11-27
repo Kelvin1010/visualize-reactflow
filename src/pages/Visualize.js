@@ -1,8 +1,10 @@
-import { Box } from '@chakra-ui/react'
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { Box, useColorModeValue } from '@chakra-ui/react'
 import { nanoid } from 'nanoid';
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import ReactFlow, { addEdge, Background, Controls, getRectOfNodes, MarkerType, Position, updateEdge, useEdgesState, useNodesState, useReactFlow } from 'reactflow'
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import styled, { ThemeProvider } from 'styled-components';
 import { createGraphLayout } from '../components/algorithms-layout/layout-elkjs';
 import EdgesContainer from '../components/edges-container';
 import GroupContainer from '../components/group-container';
@@ -45,6 +47,7 @@ import {
 import Sidebar from '../components/sidebar';
 import { atomState } from '../helper/atom';
 import { file } from '../helper/autodraw/stateRecoil';
+import { darkTheme, lightTheme } from '../theme/theme';
 
 
 
@@ -96,6 +99,10 @@ const rfStyle = {
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
+const ReactFlowStyled = styled(ReactFlow)`
+    background-color: ${(props) => props.theme.bg}
+`
+
 function Visualize() {
 
     const setValueAtom = useSetRecoilState(atomState);
@@ -109,6 +116,13 @@ function Visualize() {
     const selectedNodes = Array.from(nodes).filter((n) => n.selected);
     const getWandH = getRectOfNodes(selectedNodes);
     const filehere = useRecoilValue(file);
+    const modalColor = useColorModeValue('white', 'black')
+    const [mode, setMode] = useState('dark');
+    const theme = mode === 'dark' ? darkTheme : lightTheme;
+
+    const handleToggleModeBackGround = () => {
+        setMode((m) => (m === 'dark' ? 'light' : 'dark'));
+    };
 
     const onConnect = useCallback((connection) => setEdges((eds) => addEdge({
         ...connection, 
@@ -261,31 +275,37 @@ function Visualize() {
         }
         handleCreateGroup()
     }, [filehere])
-
     return (
         <Box className='visualize'>
             <Header/>
             <div className='dndflow'>
                 <Sidebar />
                 <div className='reactflow-wrapper' ref={reactFlowWrapper} id="download-image">
-                    <ReactFlow
-                        nodes={nodes}
-                        edges={edges}
-                        onNodesChange={onNodesChange}
-                        onEdgesChange={onEdgesChange}
-                        onInit={setReactFlowInstance}
-                        onDrop={onDrop}
-                        onDragOver={onDragOver}
-                        onConnect={onConnect}
-                        onEdgeUpdate={onEdgeUpdate}
-                        style={rfStyle}
-                        nodeTypes={nodeTypes}
-                        edgeTypes={edgeTypes}
-                        fitView
-                    >
-                        <Background />
-                        <Controls />
-                    </ReactFlow>
+                    <ThemeProvider theme={theme}>
+                        {/* <div className='themeColorBg'>
+                        {mode ==='dark' ? <MoonIcon color={'white'} onClick={handleToggleModeBackGround}/> : <SunIcon color={'black'} onClick={handleToggleModeBackGround} />}
+                        </div> */}
+                        <ReactFlowStyled
+                            nodes={nodes}
+                            edges={edges}
+                            onNodesChange={onNodesChange}
+                            onEdgesChange={onEdgesChange}
+                            onInit={setReactFlowInstance}
+                            onDrop={onDrop}
+                            onDragOver={onDragOver}
+                            onConnect={onConnect}
+                            onEdgeUpdate={onEdgeUpdate}
+                            nodeTypes={nodeTypes}
+                            edgeTypes={edgeTypes}
+                            style={{
+                                backgroundColor: modalColor
+                            }}
+                            fitView
+                        >
+                            <Background />
+                            <Controls />
+                        </ReactFlowStyled>
+                    </ThemeProvider>
                 </div>
             </div>
         </Box>

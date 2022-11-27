@@ -1,3 +1,4 @@
+import { UploadOutlined } from '@ant-design/icons';
 import React, { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { read, utils } from 'xlsx';
@@ -38,10 +39,12 @@ function ReadFile() {
 
     return (
         <>
-            <button
-                className='buttonfile'
+            <div 
+                className="dndnode" 
+                draggable
                 onClick={fileUploadButton}
             >
+                <UploadOutlined />&nbsp;
                 Open File [CSV, XLXS]
                 <input 
                     id="fileButton" 
@@ -50,7 +53,7 @@ function ReadFile() {
                     hidden 
                     name={'file'}
                 />
-            </button>
+            </div>
             <span>{error}</span>
         </>
     )

@@ -1,4 +1,5 @@
-import { Button } from '@chakra-ui/react';
+import { DownloadOutlined } from '@ant-design/icons';
+import { useColorModeValue } from '@chakra-ui/react';
 import { toPng } from 'html-to-image';
 import React from 'react'
 
@@ -28,14 +29,22 @@ function DownloadImageButton() {
         }).then(DownloadImage);
     };
 
+    const bg = useColorModeValue('white','black');
+    const text = useColorModeValue('black','white');
+    const border = useColorModeValue('black','white')
     return (
-      <div style={{
-        display:'flex',
-        justifyContent:'center'
-      }}>
-        <button className='buttonfile' onClick={handleClickToDownLoadImage}>
-          Download Image
-        </button>
+      <div 
+        style={{
+          backgroundColor:bg,
+          color: text,
+          border: border
+        }} 
+        className="dndnode" 
+        draggable
+        onClick={handleClickToDownLoadImage}
+      >
+        <DownloadOutlined />&nbsp;
+        Download Image
       </div>
     )
 }

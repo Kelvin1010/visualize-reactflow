@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { read, utils } from "xlsx";
-import { Box, Button, Input, Text, VisuallyHidden } from "@chakra-ui/react";
+import { Box, Button, Input, Text, useColorModeValue, VisuallyHidden } from "@chakra-ui/react";
 import { convertCsvToJson } from "../../../helper/convert";
 import NodeContainer from "../../node-container";
 
@@ -8,6 +8,8 @@ import NodeContainer from "../../node-container";
 function FileData({ onCallback }) {
   const [file, setFile] = useState(null);
   const fileInput = useRef(null);
+  const colorButton = useColorModeValue('black','black')
+
 
   function handleChangeInput(e) {
     var file = e.target.files[0];
@@ -52,7 +54,7 @@ function FileData({ onCallback }) {
 
   return (
     <Box textAlign="center">
-      <Button mb="4" onClick={handleClick}>
+      <Button mb="4" onClick={handleClick} color={colorButton}>
         Open file dialog
       </Button>
       {file?.name && <Text>Name file: {file.name}</Text>}
@@ -64,6 +66,7 @@ function FileData({ onCallback }) {
 }
 
 function Sidebar({ onDragStart }) {
+
   return (
     <div className="dndnode" onDragStart={(event) => onDragStart(event, "file")} draggable>
       Nhập File

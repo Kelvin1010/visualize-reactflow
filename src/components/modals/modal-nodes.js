@@ -1,5 +1,5 @@
 import { SunIcon } from '@chakra-ui/icons'
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react'
+import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { JsonPrettyViewer } from 'react-json-friendly-viewer';
 import 'react-json-friendly-viewer/style.css';
@@ -11,10 +11,11 @@ function ModalNodes({data,...props}) {
     const [query, setQuery] = useState("");
 
     const keys = Object.keys(data?.output?.[0] || {})
-    
+    const iconModalColor = useColorModeValue('black','black')
+
     return (
         <>
-            <Button onClick={onOpen}><SunIcon /></Button>
+            <Button onClick={onOpen}><SunIcon color={iconModalColor} /></Button>
 
             <Modal 
                 scrollBehavior={'inside'}

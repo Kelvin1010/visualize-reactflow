@@ -31,6 +31,7 @@
     "react-use": "^17.4.0",
     "reactflow": "^11.3.0",
     "recoil": "^0.7.6",
+    "styled-components": "^5.3.6",
     "web-vitals": "^3.1.0",
     "web-worker": "^1.2.0",
     "xlsx": "^0.18.5"

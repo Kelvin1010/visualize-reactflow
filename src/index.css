@@ -33,7 +33,7 @@ body,
 .dndflow .dndnode {
   height: 20px;
   padding: 4px;
-  border: 1px solid #1a192b;
+  border: 1px solid !important;
   border-radius: 2px;
   margin-bottom: 10px;
   display: flex;
@@ -42,8 +42,8 @@ body,
   cursor: grab;
 }
 .dndflow .dndnode:hover{
-  background-color: teal;
-  color: white;
+  background-color: teal !important;
+  color: white !important;
 }
 
 .dndflow .dndnode.input {
@@ -63,12 +63,12 @@ body,
   margin-top: 10px;
 }
 
-.dndflow .react-flow__node .react-flow__handle {
+/* .dndflow .react-flow__node .react-flow__handle {
   z-index: 2;
   border-radius: unset;
   border: none;
   background-color: teal;
-}
+} */
 
 .dndflow .react-flow__node .react-flow__handle.react-flow__handle-right {
   right: -25px;
