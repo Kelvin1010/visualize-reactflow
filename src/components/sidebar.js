@@ -4,6 +4,7 @@ import DarkLight from './dark-light';
 import DownloadImageButton from './download-image/download-image';
 import DownloadImageJpegButton from './download-image/download-image-jpeg';
 import DownloadImageSvgButton from './download-image/download-image-svg';
+import Edges from './edges';
 import { 
   AreaBasicChartWrapper,
   AreaStackedChartWrapper,
@@ -46,6 +47,7 @@ import {
   TreeMapsChartWrapper
 } from "./nodes";
 import ReadFile from "./read-files/ReadFile";
+import Variant from './variant';
 
 function Sidebar() {
     const onDragStart = (event, nodeType) => {
@@ -73,6 +75,8 @@ function Sidebar() {
               </h2>
               <AccordionPanel>
                 <DarkLight />
+                <Edges />
+                <Variant />
                 <AccordionItem border="none">
                   <h2>
                     <AccordionButton>

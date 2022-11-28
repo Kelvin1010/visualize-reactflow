@@ -44,7 +44,7 @@ function DownloadImageSvgButton() {
         onClick={handleClickToDownLoadImage}
       >
         <DownloadOutlined />&nbsp;
-        Download Image Svg
+        Image Svg
       </div>
     )
 }

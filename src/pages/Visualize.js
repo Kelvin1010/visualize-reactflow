@@ -2,7 +2,7 @@ import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Box, useColorModeValue } from '@chakra-ui/react'
 import { nanoid } from 'nanoid';
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import ReactFlow, { addEdge, Background, Controls, getRectOfNodes, MarkerType, Position, updateEdge, useEdgesState, useNodesState, useReactFlow } from 'reactflow'
+import ReactFlow, { addEdge, Background, Controls, getRectOfNodes, MarkerType, Position, updateEdge, useEdgesState, useNodesInitialized, useNodesState, useReactFlow } from 'reactflow'
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import styled, { ThemeProvider } from 'styled-components';
 import { createGraphLayout } from '../components/algorithms-layout/layout-elkjs';
@@ -54,6 +54,7 @@ import {
 import Sidebar from '../components/sidebar';
 import { atomState } from '../helper/atom';
 import { file } from '../helper/autodraw/stateRecoil';
+import { variant } from '../helper/variant/stateRecoil';
 import { darkTheme, lightTheme } from '../theme/theme';
 
 
@@ -121,16 +122,15 @@ function Visualize() {
 
     const setValueAtom = useSetRecoilState(atomState);
     const reactFlowWrapper = useRef(null);
-    const dragRef = useRef(null);
-    const [target, setTarget] = useState(null);
     const [nodes, setNodes, onNodesChange] = useNodesState([]);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-    const { getIntersectingNodes } = useReactFlow();
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
     const selectedNodes = Array.from(nodes).filter((n) => n.selected);
     const getWandH = getRectOfNodes(selectedNodes);
     const filehere = useRecoilValue(file);
-    const modalColor = useColorModeValue('white', 'black')
+    const modalColor = useColorModeValue('white', 'black');
+    const backgroundColorReactFlow = useColorModeValue('black','white');
+    const variantValue = useRecoilValue(variant);
     const [mode, setMode] = useState('dark');
     const theme = mode === 'dark' ? darkTheme : lightTheme;
 
@@ -317,7 +317,12 @@ function Visualize() {
                             }}
                             fitView
                         >
-                            <Background />
+                            <Background 
+                                variant={variantValue}
+                                style={{
+                                    color: backgroundColorReactFlow
+                                }}
+                            />
                             <Controls />
                         </ReactFlowStyled>
                     </ThemeProvider>

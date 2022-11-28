@@ -141,3 +141,19 @@
 .ant-upload{
     color: red !important;
 }
+
+.select-button{
+    height: 20px;
+    border: 1px solid !important;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+}
+.select-button:hover{
+    background-color: teal !important;
+    color: white !important;
+}

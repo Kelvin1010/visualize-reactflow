@@ -1,8 +1,9 @@
 import { useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
-import { EdgeLabelRenderer, getBezierPath, getConnectedEdges, getSmoothStepPath, useEdges, useNodes, useReactFlow, useStoreApi } from 'reactflow';
+import { EdgeLabelRenderer, getBezierPath, getConnectedEdges, getSimpleBezierPath, getSmoothStepPath, getStraightPath, useEdges, useNodes, useReactFlow, useStoreApi } from 'reactflow';
+import { useRecoilValue } from 'recoil';
+import { edges } from '../helper/edges/stateRecoil';
 
-const foreignObjectSize = 40;
 
 function EdgesContainer({
     id,
@@ -17,7 +18,22 @@ function EdgesContainer({
     markerEnd,
 }) {
 
-    const [edgePath, labelX, labelY] = getBezierPath({
+    const typeEdge = useRecoilValue(edges)
+    function Types(){
+        switch (typeEdge) {
+            case 'getBezierPath':
+                return getBezierPath
+            case 'getSmoothStepPath':
+                return getSmoothStepPath
+            case 'getStraightPath':
+                return getStraightPath
+            case 'getSimpleBezierPath':
+                return getSimpleBezierPath
+            default:
+                return getBezierPath;
+        }
+    }
+    const [edgePath, labelX, labelY] = (Types())({
         sourceX,
         sourceY,
         sourcePosition,

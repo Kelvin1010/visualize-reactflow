@@ -44,7 +44,7 @@ function DownloadImageJpegButton() {
         onClick={handleClickToDownLoadImage}
       >
         <DownloadOutlined />&nbsp;
-        Download Image Jpeg
+        Image Jpeg
       </div>
     )
 }

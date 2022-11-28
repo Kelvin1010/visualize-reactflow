@@ -1,4 +1,4 @@
-import { SunIcon } from '@chakra-ui/icons'
+import { ViewIcon } from '@chakra-ui/icons'
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { JsonPrettyViewer } from 'react-json-friendly-viewer';
@@ -15,7 +15,7 @@ function ModalNodes({data,...props}) {
 
     return (
         <>
-            <Button onClick={onOpen}><SunIcon color={iconModalColor} /></Button>
+            <Button onClick={onOpen}><ViewIcon color={iconModalColor} /></Button>
 
             <Modal 
                 scrollBehavior={'inside'}
