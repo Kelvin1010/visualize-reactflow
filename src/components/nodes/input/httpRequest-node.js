@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react";
+import { Button, FormControl, FormErrorMessage, FormLabel, Input, useColorModeValue } from "@chakra-ui/react";
 import axios from "axios";
 import { convertCsvToJson } from "../../../helper/convert";
 import NodeContainer from "../../node-container";
@@ -44,6 +44,8 @@ function HttpRequest({ onCallback }) {
     }
   }
 
+  const colorbuttonhttp = useColorModeValue('black','black')
+
   return (
     <form onSubmit={handleSubmit}>
       <FormControl isInvalid={error}>
@@ -51,7 +53,7 @@ function HttpRequest({ onCallback }) {
         <Input id="url" value={url} onChange={handleChangeUrl} />
         <FormErrorMessage>{error && "Please check your url again."}</FormErrorMessage>
       </FormControl>
-      <Button mt="4" type="submit" isLoading={loading}>
+      <Button mt="4" type="submit" isLoading={loading} color={colorbuttonhttp}>
         Load Data
       </Button>
     </form>

@@ -2,11 +2,12 @@ import React from 'react';
 import produce from "immer";
 import { Box, CloseButton, Divider, Stack, Text, useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { DragHandleIcon } from "@chakra-ui/icons";
-import { getConnectedEdges, Handle, useReactFlow, useStoreApi } from 'reactflow';
+import { getConnectedEdges, Handle, useNodes, useReactFlow, useStoreApi } from 'reactflow';
 import { useRecoilState } from 'recoil';
 import { atomState } from '../helper/atom';
 import ModalNodes from './modals/modal-nodes';
 import styled from 'styled-components';
+import InfoNode from './info-node';
 
 
 const Node = styled.div`
@@ -122,8 +123,11 @@ function NodeContainer({
                     <DragHandleIcon mr="2" />
                     <Text fontSize="xl">{label}</Text>
                 </Box>
-                <ModalNodes data={atom} />
-                <CloseButton onClick={handleDeleteNode} />
+                <Box display={'flex'} alignItems={'center'}>
+                    <InfoNode />
+                    <ModalNodes data={atom} />
+                    <CloseButton onClick={handleDeleteNode} />
+                </Box>
                 </Stack>
                 <Divider />
                 <Box padding="4">{childrenWithProps}</Box>

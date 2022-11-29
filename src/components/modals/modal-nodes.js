@@ -11,11 +11,12 @@ function ModalNodes({data,...props}) {
     const [query, setQuery] = useState("");
 
     const keys = Object.keys(data?.output?.[0] || {})
-    const iconModalColor = useColorModeValue('black','black')
+    const iconButtonModal = useColorModeValue('black','white')
+    const iconModalColor = useColorModeValue('white','black')
 
     return (
         <>
-            <Button onClick={onOpen}><ViewIcon color={iconModalColor} /></Button>
+            <Button onClick={onOpen} _hover={false} backgroundColor={iconButtonModal}><ViewIcon color={iconModalColor} /></Button>
 
             <Modal 
                 scrollBehavior={'inside'}
@@ -45,9 +46,9 @@ function ModalNodes({data,...props}) {
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button colorScheme='blue' mr={3}>
+                    {/* <Button colorScheme='blue' mr={3}>
                     Save
-                    </Button>
+                    </Button> */}
                     <Button onClick={onClose}>Cancel</Button>
                 </ModalFooter>
                 </ModalContent>

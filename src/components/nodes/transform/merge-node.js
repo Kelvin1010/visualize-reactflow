@@ -1,4 +1,4 @@
-import { Box, Text, Select, Stack } from "@chakra-ui/react";
+import { Box, Text, Select, Stack, useColorModeValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getConnectedEdges, getIncomers, useEdges, useNodes, useReactFlow } from "reactflow";
 import { useRecoilValue } from "recoil";
@@ -68,13 +68,15 @@ function MergeNode({ onCallback, id, isConnectable }) {
     onCallback({ output, input: { ...input, [name]: value } });
   }
 
+  const colorButtonMerge = useColorModeValue('black','white');
+
   return (
     <Stack>
       <Box position="relative">
         <Select name="column1" value={input.column1} onChange={handleChangeInput}>
           {column1.length > 0 ? (
             column1.map((value) => (
-              <option key={value + "col1"} value={value}>
+              <option key={value + "col1"} value={value} style={{ color: colorButtonMerge }} >
                 {value}
               </option>
             ))

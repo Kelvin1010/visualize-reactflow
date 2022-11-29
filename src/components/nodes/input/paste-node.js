@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormControl, FormLabel, Select, Stack, Textarea } from "@chakra-ui/react";
+import { FormControl, FormLabel, Select, Stack, Textarea, useColorModeValue } from "@chakra-ui/react";
 import { convertCsvToJson } from "../../../helper/convert";
 import NodeContainer from "../../node-container";
 
@@ -31,13 +31,17 @@ function PasteData({ onCallback }) {
     }
   }
 
+  const colorButton = useColorModeValue('black', 'white')
+
   return (
     <Stack>
       <FormControl>
         <FormLabel>Data type</FormLabel>
         <Select onChange={handleChangeDataType} value={dataType}>
           {selectPaste.map((value) => (
-            <option key={value} value={value}>
+            <option key={value} value={value} style={{
+              color: colorButton
+            }}>
               {value}
             </option>
           ))}

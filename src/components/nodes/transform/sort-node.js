@@ -1,4 +1,4 @@
-import { Box, FormControl, FormLabel, Select, Stack } from "@chakra-ui/react";
+import { Box, FormControl, FormLabel, Select, Stack, useColorModeValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { getIncomers, useEdges, useNodes, useReactFlow } from "reactflow";
 import { useRecoilValue } from "recoil";
@@ -47,6 +47,8 @@ function SortNode({ onCallback, id, isConnectable }) {
     onCallback({ output, input });
   }
 
+  const colorOptionSort = useColorModeValue('black', 'white')
+
   return (
     <Stack>
       <FormControl>
@@ -55,7 +57,7 @@ function SortNode({ onCallback, id, isConnectable }) {
           <Select name="column" value={input.column} onChange={handleChangeInput}>
             {columns.length > 0 ? (
               columns.map((value) => (
-                <option key={value} value={value}>
+                <option key={value} value={value} style={{ color: colorOptionSort }}>
                   {value}
                 </option>
               ))
@@ -72,8 +74,8 @@ function SortNode({ onCallback, id, isConnectable }) {
         <FormLabel>Order:</FormLabel>
         <Box position="relative">
           <Select name="order" value={input.order} onChange={handleChangeInput}>
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
+            <option value="asc"  style={{ color: colorOptionSort }}>Ascending</option>
+            <option value="desc"  style={{ color: colorOptionSort }}>Descending</option>
           </Select>
         </Box>
       </FormControl>

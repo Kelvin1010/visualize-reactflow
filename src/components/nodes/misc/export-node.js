@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CSVLink } from "react-csv";
-import { Button, Stack} from "@chakra-ui/react";
+import { Button, Stack, useColorModeValue} from "@chakra-ui/react";
 import { useDebounce } from "react-use";
 import { useRecoilValue } from "recoil";
 import { getIncomers, useEdges, useNodes, useReactFlow } from "reactflow";
@@ -76,12 +76,15 @@ function ExportData({ onCallback, id, isConnectable }) {
   const dataDown = [];
   dataDown.push(atomParent?.data);
   const DataCsv = dataDown[0]?.output;
+
+  const colorbuttonExport = useColorModeValue('black', 'black');
+
   return (
     <Stack>
       <CSVLink filename={fileNameCsv} data={DataCsv || []}>
-        <Button width={"100%"}>Download csv</Button>
+        <Button width={"100%"} color={colorbuttonExport}>Download csv</Button>
       </CSVLink>
-      <Button onClick={handleExportDataToJson}>Download json</Button>
+      <Button onClick={handleExportDataToJson} color={colorbuttonExport}>Download json</Button>
     </Stack>
   );
 }

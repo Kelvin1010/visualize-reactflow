@@ -1,4 +1,4 @@
-import { Box, FormControl, FormLabel, Input, Select, Stack } from "@chakra-ui/react";
+import { Box, FormControl, FormLabel, Input, Select, Stack, useColorModeValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDebounce } from "react-use";
 import { getIncomers, useEdges, useNodes, useReactFlow } from "reactflow";
@@ -60,6 +60,8 @@ function FilterNode({ onCallback, id, isConnectable }) {
     setInput({ ...input, [name]: value });
   }
 
+  const colorOption = useColorModeValue('black','white')
+
   return (
     <Stack>
       <FormControl>
@@ -68,7 +70,7 @@ function FilterNode({ onCallback, id, isConnectable }) {
           <Select name="column" value={input.column} onChange={handleChangeInput}>
             {columns.length > 0 ? (
               columns.map((value) => (
-                <option key={value} value={value}>
+                <option key={value} value={value} style={{ color: colorOption }}>
                   {value}
                 </option>
               ))
@@ -85,13 +87,13 @@ function FilterNode({ onCallback, id, isConnectable }) {
         <FormControl>
           <FormLabel>Condition:</FormLabel>
           <Select name="conditionId" value={input.conditionId} onChange={handleChangeInput} pb="2">
-            <option value="">select condition</option>
-            <option value="5">text is exactly</option>
-            <option value="6">text is not exactly</option>
-            <option value="7">text includes</option>
-            <option value="8">text does not includes</option>
-            <option value="notnull">data is not empty or null</option>
-            <option value="regex">data matches regex</option>
+            <option value="" style={{ color: colorOption }}>select condition</option>
+            <option value="5" style={{ color: colorOption }}>text is exactly</option>
+            <option value="6" style={{ color: colorOption }}>text is not exactly</option>
+            <option value="7" style={{ color: colorOption }}>text includes</option>
+            <option value="8" style={{ color: colorOption }}>text does not includes</option>
+            <option value="notnull" style={{ color: colorOption }}>data is not empty or null</option>
+            <option value="regex" style={{ color: colorOption }}>data matches regex</option>
           </Select>
           {input.conditionId && (
             <Input name="conditionValue" value={input.conditionValue} onChange={handleChangeInput} />

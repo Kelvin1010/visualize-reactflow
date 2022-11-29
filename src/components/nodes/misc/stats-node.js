@@ -1,4 +1,4 @@
-import { Box, FormControl, FormLabel, Select, Stack, Text } from "@chakra-ui/react";
+import { Box, FormControl, FormLabel, Select, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import isEmpty from "lodash/isEmpty";
 import isString from "lodash/isString";
@@ -53,6 +53,8 @@ function StatsNode({ onCallback, id, isConnectable }) {
     setOutput(output);
   }
 
+  const colorOption = useColorModeValue('black', 'white')
+
   return (
     <Stack>
       <FormControl>
@@ -61,7 +63,9 @@ function StatsNode({ onCallback, id, isConnectable }) {
           <Select name="column" value={input.column} onChange={handleChangeInput}>
             {columns.length > 0 ? (
               columns.map((value) => (
-                <option key={value} value={value}>
+                <option key={value} value={value} style={{
+                  color: colorOption
+                }}>
                   {value}
                 </option>
               ))

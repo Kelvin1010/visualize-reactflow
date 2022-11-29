@@ -1,4 +1,4 @@
-import { Box, FormControl, FormLabel, Select, Stack } from "@chakra-ui/react";
+import { Box, FormControl, FormLabel, Select, Stack, useColorModeValue } from "@chakra-ui/react";
 import { groups as groupTransfrom } from "d3-array";
 import { useEffect, useState } from "react";
 import { getIncomers, useEdges, useNodes, useReactFlow } from "reactflow";
@@ -47,6 +47,8 @@ function GroupNode({ onCallback, id, isConnectable }) {
     onCallback({ output, input });
   }
 
+  const colorOption = useColorModeValue('black','white')
+
   return (
     <Stack>
       <FormControl>
@@ -55,7 +57,7 @@ function GroupNode({ onCallback, id, isConnectable }) {
           <Select name="column" value={input.column} onChange={handleChangeInput}>
             {columns.length > 0 ? (
               columns.map((value) => (
-                <option key={value} value={value}>
+                <option key={value} value={value} style={{ color: colorOption }}>
                   {value}
                 </option>
               ))

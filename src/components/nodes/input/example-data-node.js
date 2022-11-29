@@ -1,4 +1,4 @@
-import { Select } from "@chakra-ui/react";
+import { Select, useColorModeValue } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import NodeContainer from "../../node-container";
 import sex from '../../../data/sex.json';
@@ -30,20 +30,20 @@ function ExampleData({ onCallback, data }) {
     setOption(value);
     onCallback({ output, input: { option: value } });
   }
-  
+  const colorOptionEx = useColorModeValue('black', 'white')
   return (
     <>
       <Select value={option} onChange={handleChange}>
-        <option value="countries_indicators">Countries Indicator</option>
-        <option value="culinary">Culinary</option>
-        <option value="radar">Radar</option>
-        <option value="data-bubble">Data Bubble</option>
-        <option value="sex">Sex</option>
-        <option value="city">Citys</option>
-        <option value="city2">2 City</option>
-        <option value="ufo_signhtings">UFO Sightings</option>
-        <option value="continents">Continents</option>
-        <option value="gdp">GDP</option>
+        <option value="countries_indicators" style={{ color: colorOptionEx }}>Countries Indicator</option>
+        <option value="culinary" style={{ color: colorOptionEx }}>Culinary</option>
+        <option value="radar" style={{ color: colorOptionEx }}>Radar</option>
+        <option value="data-bubble" style={{ color: colorOptionEx }}>Data Bubble</option>
+        <option value="sex" style={{ color: colorOptionEx }}>Sex</option>
+        <option value="city" style={{ color: colorOptionEx }}>Citys</option>
+        <option value="city2" style={{ color: colorOptionEx }}>2 City</option>
+        <option value="ufo_signhtings" style={{ color: colorOptionEx }}>UFO Sightings</option>
+        <option value="continents" style={{ color: colorOptionEx }}>Continents</option>
+        <option value="gdp" style={{ color: colorOptionEx }}>GDP</option>
       </Select>
     </>
   );

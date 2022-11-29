@@ -2,8 +2,8 @@ import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Box, useColorModeValue } from '@chakra-ui/react'
 import { nanoid } from 'nanoid';
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import ReactFlow, { addEdge, Background, Controls, getRectOfNodes, MarkerType, Position, updateEdge, useEdgesState, useNodesInitialized, useNodesState, useReactFlow } from 'reactflow'
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import ReactFlow, { addEdge, Background, Controls, getRectOfNodes, MarkerType, MiniMap, Position, updateEdge, useEdgesState, useNodesInitialized, useNodesState, useReactFlow } from 'reactflow'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import styled, { ThemeProvider } from 'styled-components';
 import { createGraphLayout } from '../components/algorithms-layout/layout-elkjs';
 import EdgesContainer from '../components/edges-container';
@@ -54,6 +54,7 @@ import {
 import Sidebar from '../components/sidebar';
 import { atomState } from '../helper/atom';
 import { file } from '../helper/autodraw/stateRecoil';
+import { infoNodeState } from '../helper/info-node/atom';
 import { variant } from '../helper/variant/stateRecoil';
 import { darkTheme, lightTheme } from '../theme/theme';
 
@@ -131,6 +132,7 @@ function Visualize() {
     const modalColor = useColorModeValue('white', 'black');
     const backgroundColorReactFlow = useColorModeValue('black','white');
     const variantValue = useRecoilValue(variant);
+    const [infoNode, setInfoNode] = useRecoilState(infoNodeState);
     const [mode, setMode] = useState('dark');
     const theme = mode === 'dark' ? darkTheme : lightTheme;
 
@@ -289,6 +291,13 @@ function Visualize() {
         }
         handleCreateGroup()
     }, [filehere])
+
+    function handleNodeClick(event,node){
+        event.preventDefault();
+        setInfoNode(node);
+        console.log(node);
+    } 
+
     return (
         <Box className='visualize'>
             <Header/>
@@ -306,6 +315,7 @@ function Visualize() {
                             onEdgesChange={onEdgesChange}
                             onInit={setReactFlowInstance}
                             onDrop={onDrop}
+                            onNodeClick={handleNodeClick}
                             onDragOver={onDragOver}
                             onConnect={onConnect}
                             onEdgeUpdate={onEdgeUpdate}
@@ -324,6 +334,7 @@ function Visualize() {
                                 }}
                             />
                             <Controls />
+                            <MiniMap zoomable pannable/>
                         </ReactFlowStyled>
                     </ThemeProvider>
                 </div>
