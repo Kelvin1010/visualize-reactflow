@@ -334,7 +334,7 @@ function Visualize() {
                                 }}
                             />
                             <Controls />
-                            <MiniMap zoomable pannable/>
+                            <MiniMap style={{ backgroundColor: backgroundColorReactFlow }} zoomable pannable/>
                         </ReactFlowStyled>
                     </ThemeProvider>
                 </div>
