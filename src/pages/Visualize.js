@@ -293,9 +293,8 @@ function Visualize() {
     }, [filehere])
 
     function handleNodeClick(event,node){
-        event.preventDefault();
+        event.stopImmediatePropagation()
         setInfoNode(node);
-        console.log(node);
     } 
 
     return (

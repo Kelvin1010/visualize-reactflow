@@ -1,7 +1,9 @@
 .welcome, .register, .login{
     width: 100vw;
     height: 100vh;
-    background-image: url(../../public/img/bigdata.jpg);
+    background-image: url(../../public/img/logo.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -161,4 +163,8 @@
 .info-user{
     margin-right: 20px;
     align-items: center;
+}
+.name-user{
+    color: white;
+    font-weight: 500;
 }

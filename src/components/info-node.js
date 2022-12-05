@@ -7,7 +7,6 @@ import { infoNode } from '../helper/info-node/stateRecoil'
 function InfoNode() {
 
     const infoNodeValue = useRecoilValue(infoNode)
-    console.log(infoNodeValue)
 
     const iconButtonInfo = useColorModeValue('black','white')
     const iconInfoColor = useColorModeValue('white','black')
