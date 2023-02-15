@@ -293,7 +293,7 @@ function Visualize() {
     }, [filehere])
 
     function handleNodeClick(event,node){
-        event.stopImmediatePropagation()
+        // event.stopImmediatePropagation();
         setInfoNode(node);
     } 
 

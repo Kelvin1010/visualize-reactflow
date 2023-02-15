@@ -6,8 +6,6 @@ export function Move2ColumnsOfData(input, { xColumn, yColumn }) {
     return input?.map((i) => ({ x: i[xColumn], y: i[yColumn] }));
 }
 
-
-
 export function Move3ColumnsOfData(input, { xColumn, yColumn, zColumn }) {
     if (!Array.isArray(input)) {
         return [];
